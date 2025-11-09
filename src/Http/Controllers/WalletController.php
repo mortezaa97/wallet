@@ -7,16 +7,17 @@ namespace Mortezaa97\Wallet\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Mortezaa97\Wallet\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Mortezaa97\Wallet\Http\Resources\WalletResource;
+use Mortezaa97\Wallet\WalletFacade;
 
 class WalletController extends Controller
 {
     public function index()
     {
-        Gate::authorize('viewAny', Wallet::class);
-        return WalletResource::collection(Wallet::all());
+        return WalletResource::collection(WalletFacade::getWalletsByUser(Auth::user()->id))->response()->getData(true);
     }
 
     public function store(Request $request)

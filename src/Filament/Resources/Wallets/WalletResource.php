@@ -17,6 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class WalletResource extends Resource
 {
@@ -24,7 +25,14 @@ class WalletResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Wallet';
+    protected static ?string $navigationLabel = 'کیف پول ها';
+
+    protected static ?string $modelLabel = 'کیف پول';
+
+    protected static ?string $pluralModelLabel = 'کیف پول ها';
+
+    protected static string|null|UnitEnum $navigationGroup = 'تنظیمات';
+
 
     public static function form(Schema $schema): Schema
     {

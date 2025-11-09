@@ -46,5 +46,18 @@ class WalletServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'wallet');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+
+        // Register the wallet service
+        $this->app->singleton(
+            \Mortezaa97\Wallet\Contracts\WalletServiceInterface::class,
+            \Mortezaa97\Wallet\Services\WalletService::class
+        );
+
+        // Register alias for facade
+        $this->app->alias(
+            \Mortezaa97\Wallet\Contracts\WalletServiceInterface::class,
+            'wallet'
+        );
     }
 }

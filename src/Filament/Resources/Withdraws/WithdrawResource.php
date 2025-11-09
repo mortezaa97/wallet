@@ -17,6 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class WithdrawResource extends Resource
 {
@@ -24,7 +25,13 @@ class WithdrawResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'withdraw';
+    protected static ?string $navigationLabel = 'برداشت ها';
+
+    protected static ?string $modelLabel = 'برداشت';
+
+    protected static ?string $pluralModelLabel = 'برداشت ها';
+
+    protected static string|null|UnitEnum $navigationGroup = 'مالی';
 
     public static function form(Schema $schema): Schema
     {

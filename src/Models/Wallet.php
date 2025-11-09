@@ -38,14 +38,29 @@ class Wallet extends Model
     /*
     * Relations
     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function charges(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Charge::class, 'wallet_id');
+    }
+
+    public function withdraws(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Withdraw::class, 'wallet_id');
+    }
 }
 

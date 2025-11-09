@@ -24,7 +24,13 @@ class ChargeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Charge';
+    protected static ?string $navigationLabel = 'شارژ ها';
+
+    protected static ?string $modelLabel = 'شارژ';
+
+    protected static ?string $pluralModelLabel = 'شارژ ها';
+
+    protected static string|null|\UnitEnum $navigationGroup = 'مالی';
 
     public static function form(Schema $schema): Schema
     {
