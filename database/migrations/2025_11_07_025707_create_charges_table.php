@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('balance_after', 19, 0);
             $table->string('desc')->nullable();
             $table->dateTime('expire_at')->nullable();
-            $table->enum('status', [Status::PENDING->value, Status::REJECTED->value, Status::IN_PROGRESS->value, Status::DONE->value])->default(Status::PENDING->value);
+            $table->smallInteger('status')->default(Status::PENDING->value);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->softDeletes();

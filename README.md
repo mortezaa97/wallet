@@ -16,9 +16,25 @@ composer require mortezaa97/wallet
 
 ## Usage
 
+### Filament integration
+
+If you are using [Filament](https://filamentphp.com) you may easily let administrators
+credit a user's wallet straight from the users table by adding the provided action:
+
 ```php
-// Usage description here
+use Mortezaa97\Wallet\Filament\Tables\Actions\ChargeUserWalletAction;
+
+// ...
+
+->recordActions([
+    EditAction::make()->iconButton()->tooltip('ویرایش'),
+    ChargeUserWalletAction::make(),
+])
 ```
+
+The action displays a modal where you can pick an existing wallet (or automatically create
+one), enter the amount, optional description / expiry, and decide whether the charge should
+be verified immediately.
 
 ### Testing
 

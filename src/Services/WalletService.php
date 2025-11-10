@@ -43,6 +43,23 @@ class WalletService implements WalletServiceInterface
     }
 
     /**
+     * Verify a charge by ID.
+     */
+    public function verifyChargeById(int $id): Charge
+    {
+        $charge = Charge::find($id);
+        if (!$charge) {
+            throw new \RuntimeException('Charge not found');
+        }
+        $charge->update([
+            'status' => (string)Status::DONE->value,
+        ]);
+        $wallet = $this->getWallet($charge->wallet_id);
+        $this->updateBalance($wallet, $charge->amount, $charge->created_by);
+        return $charge->fresh();
+    }
+
+    /**
      * Get wallet by user ID.
      */
     public function getWalletByUser(int $userId, string $currency = 'IRT'): ?Wallet
@@ -109,7 +126,7 @@ class WalletService implements WalletServiceInterface
                 'user_id' => $wallet->user_id,
                 'wallet_id' => $wallet->id,
                 'amount' => $amount,
-                'balance_after' => $wallet->balance,
+                'balance_after' => $wallet->balance + $amount,
                 'desc' => $description,
                 'expire_at' => $expireAt,
                 'status' => Status::PENDING->value,

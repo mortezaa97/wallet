@@ -20,8 +20,13 @@ class WalletsTable
         return $table
             ->columns([
                 \App\Filament\Components\Table\CodeTextColumn::create(),
+                \Filament\Tables\Columns\TextColumn::make('user_id')
+                    ->translateLabel()
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(),
                 \App\Filament\Components\Table\UserTextColumn::create(),
-                \Filament\Tables\Columns\TextColumn::make('balance')->numeric()->sortable(),
+                \Filament\Tables\Columns\TextColumn::make('balance')->suffix(' تومان ')->numeric()->sortable(),
                 \Filament\Tables\Columns\TextColumn::make('currency')->searchable(),
                 \App\Filament\Components\Table\StatusTextColumn::create(Wallet::class),
                 \App\Filament\Components\Table\CreatedByTextColumn::create(),
@@ -34,7 +39,7 @@ class WalletsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->iconButton()->tooltip('ویرایش'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

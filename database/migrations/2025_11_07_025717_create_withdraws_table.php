@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('bank_id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('status', [Status::PENDING->value, Status::REJECTED->value, Status::IN_PROGRESS->value, Status::DONE->value])->default(Status::PENDING->value);
             $table->unsignedBigInteger('wallet_id');
             $table->decimal('amount',20,0);
             $table->decimal('balance_after', 19, 0);
+            $table->smallInteger('status')->default(Status::PENDING->value);
             $table->date('date')->nullable();
             $table->text('desc')->nullable();
             $table->unsignedBigInteger('created_by');

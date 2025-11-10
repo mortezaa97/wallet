@@ -150,6 +150,7 @@ interface WalletServiceInterface
      */
     public function getChargesByUser(User $user, ?int $limit = null);
 
+
     /**
      * Get withdraws for a wallet.
      *
@@ -176,6 +177,16 @@ interface WalletServiceInterface
      * @return Charge
      */
     public function approveCharge(Charge $charge, int $updatedBy): Charge;
+    
+    /**
+     * Verify a charge by ID.
+     *
+     * @param int $id
+     * @return Charge
+     */
+    public function verifyChargeById(int $id): Charge;
+
+    
 
     /**
      * Reject a charge.
